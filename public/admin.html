@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理后台 - 产品发布页</title>
+  <link rel="stylesheet" href="/themes.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body class="theme-mono admin-body">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <div class="admin-logo">⚙️ 管理中心</div>
+        <div class="admin-sub">Product Release Admin</div>
+      </div>
+      <nav class="admin-nav">
+        <a href="#" class="nav-item active" data-tab="theme">🎨 主题配置</a>
+        <a href="#" class="nav-item" data-tab="site">🏠 站点信息</a>
+        <a href="#" class="nav-item" data-tab="products">📦 产品管理</a>
+        <a href="#" class="nav-item" data-tab="preview">👁️ 前台预览</a>
+      </nav>
+      <a href="/" class="admin-back">← 返回前台</a>
+    </aside>
+
+    <main class="admin-main">
+      <section class="admin-panel active" data-panel="theme">
+        <h1 class="panel-title">主题配置</h1>
+        <p class="panel-desc">从下面 <strong>12 种精心设计</strong>的主题中选择一个，保存后立即生效应用于前台。</p>
+        <div class="themes-grid" id="themes-grid"></div>
+        <div class="panel-actions">
+          <button class="btn" id="save-theme">保存当前主题</button>
+          <span class="current-theme-text">当前主题：<span id="current-theme-text" class="current-theme">—</span></span>
+        </div>
+      </section>
+
+      <section class="admin-panel" data-panel="site">
+        <h1 class="panel-title">站点信息</h1>
+        <p class="panel-desc">修改站点基本信息，保存后立即生效。</p>
+        <form id="site-form" class="form-grid">
+          <label>站点名称<input type="text" name="name" required /></label>
+          <label>口号 / 副标题<input type="text" name="slogan" /></label>
+          <label class="full">站点描述<textarea name="description" rows="3"></textarea></label>
+          <label class="full">页脚文字<textarea name="footerText" rows="2"></textarea></label>
+          <label>联系邮箱<input type="email" name="contactEmail" /></label>
+          <div class="panel-actions">
+            <button type="submit" class="btn">保存站点信息</button>
+            <span id="site-msg" class="msg"></span>
+          </div>
+        </form>
+      </section>
+
+      <section class="admin-panel" data-panel="products">
+        <h1 class="panel-title">产品管理</h1>
+        <p class="panel-desc">添加、编辑或删除发布页上展示的产品。</p>
+        <div class="panel-actions">
+          <button class="btn" id="btn-new-product">+ 新增产品</button>
+        </div>
+        <div class="products-table" id="products-table"></div>
+      </section>
+
+      <section class="admin-panel" data-panel="preview">
+        <h1 class="panel-title">前台预览</h1>
+        <p class="panel-desc">在新窗口打开前台以获得最佳体验。</p>
+        <div class="panel-actions">
+          <a href="/" target="_blank" class="btn">在新窗口打开前台</a>
+        </div>
+        <iframe id="preview-frame" src="/" class="preview-frame"></iframe>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="product-modal">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <div class="modal-title" id="modal-title">新增产品</div>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <form id="product-form" class="modal-form">
+        <input type="hidden" name="id" />
+        <div class="row-2">
+          <label>产品名称 *<input type="text" name="name" required /></label>
+          <label>副标题<input type="text" name="subtitle" /></label>
+        </div>
+        <div class="row-3">
+          <label>版本<input type="text" name="version" placeholder="v1.0" /></label>
+          <label>分类<input type="text" name="category" placeholder="效率工具" /></label>
+          <label>价格<input type="text" name="price" placeholder="¥199 / 免费" /></label>
+        </div>
+        <label>发布日期<input type="date" name="releaseDate" /></label>
+        <label>描述<textarea name="description" rows="3" placeholder="简单介绍下产品..."></textarea></label>
+        <label>产品特色（每行一个，最多 4 项）<textarea name="features" rows="4" placeholder="端到端加密&#10;多端同步"></textarea></label>
+        <label>产品图片 URL<input type="text" name="image" placeholder="https://..." /></label>
+        <div class="row-2">
+          <label>下载链接<input type="text" name="downloadUrl" placeholder="https://..." /></label>
+          <label>官网链接<input type="text" name="officialUrl" placeholder="https://..." /></label>
+        </div>
+        <label class="checkbox"><input type="checkbox" name="highlight" /> 标记为「精选推荐」</label>
+        <div class="panel-actions">
+          <button type="submit" class="btn">保存</button>
+          <button type="button" class="btn btn-outline" id="modal-cancel">取消</button>
+          <span id="product-msg" class="msg"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
